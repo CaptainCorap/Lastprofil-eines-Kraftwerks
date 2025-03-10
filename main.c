@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-// number of power measurements
+// Festlegung der Anzahl der Leistungsmessungen, die verarbeitet werden sollen
 #define POWER_LENGTH 96
 
 int main() {
 
-    // variables for reading the measurements from file
+     // Array, das die Leistungswerte speichert
     double power[POWER_LENGTH] = {
             7.0, 7.3, 7.7, 8.0, 8.3, 8.3, 8.3, 8.3, 8.8, 9.2, 
             9.7, 10.1, 10.8, 10.8, 10.8, 11.3, 11.7, 13.1, 13.6, 13.6,
@@ -19,14 +19,14 @@ int main() {
             9.2, 9.0, 7.8, 7.2, 7.1, 6.8
     };
 
-    // variables for computing the minimum and maximun etc.
-    double p, pmin, pmax, mittelwert, summe;          //Arithmetisches
+   // Variablen zur Berechnung der statistischen Daten
+    double p, pmin, pmax, mittelwert, summe;          // Variable zur Speicherung der Summe initialisieren
     int stunde, minute, s1, m1, s2, m2, mwstd,s3;    //stunde ,minute, s1=stunde ,m1=minute,mwstd=mittelwert stunde
     minute = 0;
     stunde = 0;
     s3 = 0;
     pmin = power[0];                                                         //pmin wird auf null gesetzt
-    // print program header
+   // Kopfzeile der Ausgabe
     printf("\n\nProgramm zur Analyse eines Lastprofils\n");
     printf("--------------------------------------------------------\n");
 
@@ -34,7 +34,7 @@ int main() {
 
 
 
-    // the following loop reads a new value in every iteration
+     // Schleife zur Verarbeitung jeder Messung
     for (int i = 0; i < POWER_LENGTH; i++)
     {
         summe = summe + power[i]; //Summe aller werte von power
@@ -44,7 +44,7 @@ int main() {
 
     printf("Gelesener Wert: %lf     uhrzeit:%d:%d\n", p, stunde, minute);
 
-    if(i% 4 == 3)          //hier hatte ich hilfe das ist modulo (Mittelwert der letzten 4 Gelesenen Werte)
+    if(i% 4 == 3)            // Berechnung und Ausgabe des Mittelwerts alle vier Messungen
     {
         mwstd = mwstd /4.0 ;
         printf("Mittelwert der letzten 4 Gelesenen Werte: %.2f  \n",mwstd);
@@ -58,7 +58,7 @@ int main() {
         mwstd = 0;
     }
 
-        // compute minimum and maximum
+        // Überprüfung und Speicherung des maximalen und minimalen Leistungswerts
         if (p > pmax) // operator < zu // Hoechstlast für pmax
         {
         pmax = p;
@@ -89,8 +89,7 @@ int main() {
 
         }
     }
-            mittelwert = summe /
-                         POWER_LENGTH; //mittelwert ist gleich summe und summe wird durch die anzahl von power genommen
+            mittelwert = summe / POWER_LENGTH; // Berechnung des arithmetischen Mittels der Gesamtleistung
 
     // Ausgabe
     printf("\nErgebnisse:\n");
